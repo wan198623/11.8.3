@@ -1,0 +1,137 @@
+@import "var.less";
+*{
+  box-sizing: border-box;
+  margin:0;padding:0;
+}
+/*小屏的时候*/
+.container{
+  &{
+    width:@num1*1-@minWidth;
+    margin: auto;
+  }
+  &>.row{
+    width:100%;
+    .clear;
+  }
+  &-fluid{
+    width:100%;margin:auto;
+  }
+  &-fluid>.row{
+    width:100%;
+    .clear;
+  }
+
+}
+/*最小屏*/
+
+.loop();
+.col-s-hide{
+  display:none;
+}
+/*中屏*/
+
+@media screen and (min-width: @num1){
+  .container{
+    width:@num1;
+    margin: auto;
+  }
+  .loop(m);
+  .col-s-hide{
+    display: block;
+  }
+  .col-l-hide{
+    display: block;
+  }
+  .col-m-hide{
+    display: none;
+  }
+  .girl{
+    width:250px;
+    height:333px;
+    left:5%;
+    top:18%;
+  }
+  .about{
+    right:22%;
+    top:23%;
+    line-height:30px;
+  }
+  .girl .back .geyan {
+    margin-top:18px;
+    font-size:20px;
+    text-align: center;
+  }
+  .girl .back p{
+    margin-top:5px;
+    font-size: 16px;
+    line-height: 28px;
+  }
+  .girl .back .eglish{
+    display:block;
+  }
+  }
+
+/*大屏*/
+@media screen and (min-width: @num2){
+  .container{
+    width:@num2;
+    margin: auto;
+  }
+  .loop(l);
+  .col-s-hide{
+    display: block;
+  }
+  .col-m-hide{
+    display: block;
+  }
+  .col-l-hide{
+    display: none;
+  }
+  .girl{
+    width: 300px;
+    height:400px;
+    left:5%;
+    top:18%;
+  }
+  .girl .back p{
+    font-size: 18px;
+    margin-top:30px;
+  }
+  .about{
+    position:absolute;
+    right:24%;
+    top:25%;
+    line-height:30px;
+  }
+  .girl .back .geyan{
+    margin-top:50px;
+    font-size:24px;
+  }
+  .girl .back .eglish{
+    display: block;
+  }
+}
+    //栅格化的核心代码
+.loop(@type:s,@i:1) when (@i<=@cols){
+  .container>.row>.col-@{type}-@{i}{
+    float:left;
+    width:@i/@cols*100%;
+  }
+  .container-fluid>.row>.col-@{type}-@{i}{
+    float:left;
+    width:@i/@cols*100%;
+  }
+  .loop(@type,@i+1);
+}
+
+
+/*清除浮动*/
+.clear(){
+  &:before,&:after{
+    content: "";
+    display: block;
+  }
+  &:after{
+    clear:both;
+  }
+}
